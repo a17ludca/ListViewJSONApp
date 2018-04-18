@@ -8,13 +8,11 @@ public class Mountain {
     public String name;
     public int height;
     public String location;
-    public String url;
 
-    public Mountain(String name, int height, String location, String url) {
+    public Mountain(String name, int height, String location) {
         this.name = name;
         this.height = height;
         this.location = location;
-        this.url = url;
     }
     public String getName(){
         return name;
@@ -25,11 +23,10 @@ public class Mountain {
     public String getLocation(){
         return location;
     }
-    public String getImage(){
-        return url;
-    }
-    public String infoText(){
-        return name + "is in the" + location + "and is" + height + "m high.";
-    }
 
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -69,12 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 String name = mountainList.get(position).getName();
                 String location = mountainList.get(position).getLocation();
                 String height = Integer.toString(mountainList.get(position).getHeight());
-                String url = mountainList.get(position).getImage();
 
                 extras.putString("EXTRA_NAME", name);
                 extras.putString("EXTRA_LOCATION", location);
                 extras.putString("EXTRA_HEIGHT", height);
-                extras.putString("EXTRA_IMAGE", url);
                 intent.putExtras(extras);
                 getApplicationContext().startActivity(intent);
 
@@ -181,11 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 String location = mountain.getString("location");
                 int height = mountain.getInt("size");
 
-                String auxdata = mountain.getString("auxdata");
-                JSONObject aux = new JSONObject(auxdata);
-                String url = aux.getString("img");
-
-                Mountain m = new Mountain(name, height, location, url);
+                Mountain m = new Mountain(name, height, location);
                 mountainList.add(m);
                 mountainNames.add(name);
 
