@@ -44,9 +44,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Mountain> mountainList = new ArrayList<>();
-    List <String> mountainNames = new ArrayList<>();
     ListView myListView;
-    ArrayAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-
-                Intent intent = new Intent(getApplicationContext(), MountainDetails.class);
-                Bundle extras = new Bundle();
-
-                String name = mountainList.get(position).getName();
-                String location = mountainList.get(position).getLocation();
-                String height = Integer.toString(mountainList.get(position).getHeight());
-
-                extras.putString("EXTRA_NAME", name);
-                extras.putString("EXTRA_LOCATION", location);
-                extras.putString("EXTRA_HEIGHT", height);
-                intent.putExtras(extras);
-                getApplicationContext().startActivity(intent);
+                Toast toast = Toast.makeText(getApplication(), mountainList.get(position).toastText(), Toast.LENGTH_LONG);
+                toast.show();
 
             }
         });
@@ -181,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Mountain m = new Mountain(name, height, location);
                 mountainList.add(m);
-                mountainNames.add(name);
+
 
             }
         }
@@ -189,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-            adapter = new ArrayAdapter(getApplicationContext(),R.layout.list_item_textview,R.id.my_item_textview, mountainList);
+            ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),R.layout.list_item_textview,R.id.my_item_textview, mountainList);
             myListView = (ListView) findViewById(R.id.my_listview);
             myListView.setAdapter(adapter);
             // Implement a parsing code that loops through the entire JSON and creates objects

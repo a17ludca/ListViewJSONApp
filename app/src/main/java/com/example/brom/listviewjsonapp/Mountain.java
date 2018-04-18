@@ -23,7 +23,9 @@ public class Mountain {
     public String getLocation(){
         return location;
     }
-
+    public String toastText(){
+        return name + " is a part of the " + location + " and is " + height + "m high!";
+    }
 
     @Override
     public String toString() {
