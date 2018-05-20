@@ -7,14 +7,13 @@
     tools:context="com.example.brom.listviewjsonapp.MainActivity">
 
     <ListView
-        android:layout_width="145dp"
-        android:layout_height="417dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/my_listview"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+
+        />
 
 </android.support.constraint.ConstraintLayout>

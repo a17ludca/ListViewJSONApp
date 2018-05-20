@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ListViewJSONApp.iml" filepath="$PROJECT_DIR$/ListViewJSONApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ListViewJSONApp.iml" filepath="$PROJECT_DIR$/ListViewJSONApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ListViewJSONApp.iml" filepath="$PROJECT_DIR$/ListViewJSONApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/projectapp.iml" filepath="$PROJECT_DIR$/projectapp.iml" />
     </modules>
   </component>
 </project>

@@ -29,22 +29,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
-// Create a new class, Mountain, that can hold your JSON data
-
-// Create a ListView as in "Assignment 1 - Toast and ListView"
-
-// Retrieve data from Internet service using AsyncTask and the included networking code
-
-// Parse the retrieved JSON and update the ListView adapter
-
-// Implement a "refresh" functionality using Android's menu system
-
-
 public class MainActivity extends AppCompatActivity {
-
-    ArrayList<Mountain> mountainList = new ArrayList<>();
+    List<String> dryckNames = new ArrayList<String>();
+    List<Dryck> allDryck = new ArrayList<Dryck>();
     ListView myListView;
+    ArrayAdapter adapter;
 
 
     @Override
@@ -56,14 +45,36 @@ public class MainActivity extends AppCompatActivity {
         getJson.execute();
 
         myListView = (ListView) findViewById(R.id.my_listview);
-
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
-                Toast toast = Toast.makeText(getApplication(), mountainList.get(position).toastText(), Toast.LENGTH_LONG);
+                Context context = getApplicationContext();
+                CharSequence text = allDryck.get(pos).toastText();
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
+                Intent intent = new Intent(getApplicationContext(), Detailsactivity.class);
+                Bundle info = new Bundle();
+                String name = allDryck.get(pos).getName();
+                String loc = allDryck.get(pos).getLocation();
+                String comp = allDryck.get(pos).getCompany();
+                int size = allDryck.get(pos).getSize();
+                int cost = allDryck.get(pos).getCost();
+                String auxdata = allDryck.get(pos).getAuxdata();
+
+
+                info.putString("INFO_NAME", name);
+                info.putString("INFO_LOC", loc);
+                info.putString("INFO_COMP", comp);
+                info.putInt("INFO_SIZE", size);
+                info.putInt("INFO_COST", cost);
+                info.putString("INFO_AUX", auxdata);
+
+                intent.putExtras(info);
+                myListView.getContext().startActivity(intent);
             }
         });
     }
@@ -78,9 +89,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 
-        if(id == R.id.action_refresh)
+        if(id == R.id.about){
+            Intent intent = new Intent(this,AboutActivity.class);
+            this.startActivity(intent);
+
+            return true;
+        }
+         else if(id == R.id.action_refresh)
         {
-            mountainList.clear();
+            allDryck.clear();
             new FetchData().execute();
             Toast refreshed = Toast.makeText(this, "List have been refreshed", Toast.LENGTH_SHORT);
             refreshed.show();
@@ -104,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 // Construct the URL for the Internet service
-                URL url = new URL("http://wwwlab.iit.his.se/brom/kurser/mobilprog/dbservice/admin/getdataasjson.php?type=brom");
+                URL url = new URL("http://wwwlab.iit.his.se/a17ludca/mobilappjson/jsonfile.json");
 
                 // Create the request to the PHP-service, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -161,14 +178,17 @@ public class MainActivity extends AppCompatActivity {
             JSONArray jarray = new JSONArray(o);
 
             for (int i = 0; i < jarray.length(); i++){
-                JSONObject mountain = jarray.getJSONObject(i);
+                JSONObject dryck = jarray.getJSONObject(i);
 
-                String name = mountain.getString("name");
-                String location = mountain.getString("location");
-                int height = mountain.getInt("size");
+                String name = dryck.getString("name");
+                String company = dryck.getString("company");
+                String location = dryck.getString("location");
+                int size = dryck.getInt("size");
+                int cost = dryck.getInt("cost");
+                String auxdata = dryck.getString("auxdata");
 
-                Mountain m = new Mountain(name, height, location);
-                mountainList.add(m);
+                allDryck.add(new Dryck(name, company, location, size, cost, auxdata));
+                dryckNames.add(name);
 
 
             }
@@ -177,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-            ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),R.layout.list_item_textview,R.id.my_item_textview, mountainList);
+            ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),R.layout.list_item_textview,R.id.my_item_textview, dryckNames);
             myListView = (ListView) findViewById(R.id.my_listview);
             myListView.setAdapter(adapter);
             // Implement a parsing code that loops through the entire JSON and creates objects

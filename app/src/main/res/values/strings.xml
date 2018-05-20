@@ -1,4 +1,6 @@
 <resources>
-    <string name="app_name">a17ludca - assignment 4</string>
-    <string name="title_activity_mountain_details">MountainDetails</string>
+    <string name="app_name">Energidryck</string>
+    <string name="title_activity_mountain_details">Details</string>
+    <string name="about">About</string>
+    <string name="ok">OK</string>
 </resources>
